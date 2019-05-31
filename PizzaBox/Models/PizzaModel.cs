@@ -26,7 +26,7 @@ namespace PizzaBox.Models
         public IList<int> ToppingIDs { get; set; }
         public IList<string> Toppings { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Must be an integer")]
         [Display(Name = "Count")]
         [Range(1, int.MaxValue, ErrorMessage = "Must be at least 1")]
         public int Amount { get; set; }
