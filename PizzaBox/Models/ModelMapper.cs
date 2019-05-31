@@ -16,8 +16,8 @@ namespace PizzaBox.Models
             r.Id = restaurant.ID;
             r.Name = restaurant.Store.Name;
             r.Address = restaurant.Address.AsString();
-            r.Open = $"{restaurant.Hours.Open}:00";
-            r.Close = $"{restaurant.Hours.Close}:00";
+            r.Open = restaurant.Hours.Open;
+            r.Close = restaurant.Hours.Close;
 
             r.Constraints = restaurant.Constraints;
 

@@ -14,20 +14,25 @@
         <strike>Finish</strike>
         <font color="red">Please select a restaurant</font>
     }
+    else if (DateTime.Now.Hour < restaurant.Open || DateTime.Now.Hour >= restaurant.Close)
+    {
+        <strike>Finish</strike>
+        <font color="red">Restaurant is not currently open</font>
+    }
     else if (!(Model.PizzaCount > 0))
     {
         <strike>Finish</strike>
         <font color="red">Order must contain at least one pizza</font>
     }
+    else if (Model.Price > restaurant.Constraints.MaxPrice)
+    {
+        <strike>Finish</strike>
+        <font color="red">@restaurant.Constraints.MaxPrice$ maximum total cost</font>
+    }
     else if (Model.PizzaCount > restaurant.Constraints.MaxPizza)
     {
         <strike>Finish</strike>
         <font color="red">@restaurant.Constraints.MaxPizza pizzas max</font>
-    }
-    else if (Model.Price > restaurant.Constraints.MaxPrice)
-    {
-        <strike>Finish</strike>
-        <font color="red">@restaurant.Constraints.MaxPrice max total cost</font>
     }
     else
     {

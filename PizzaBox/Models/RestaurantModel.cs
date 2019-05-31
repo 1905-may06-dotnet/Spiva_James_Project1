@@ -17,8 +17,8 @@ namespace PizzaBox.Models
         public string Address { get; set; }
 
         [Display(Name = "Hours")]
-        public string Open { get; set; }
-        public string Close { get; set; }
+        public int Open { get; set; }
+        public int Close { get; set; }
 
         public (int? MaxPrice, int? MaxPizza, int? MaxToppings, int MinHours) Constraints { get; set; }
 

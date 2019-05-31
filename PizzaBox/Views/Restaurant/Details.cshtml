@@ -30,8 +30,8 @@
                 @Html.DisplayFor(modelItem => modelItem.Address)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => modelItem.Open) -
-                @Html.DisplayFor(modelItem => modelItem.Close)
+                @Html.DisplayFor(modelItem => modelItem.Open):00 -
+                @Html.DisplayFor(modelItem => modelItem.Close):00
             </td>
             <td>
                 @Html.ActionLink("Orders", "ViewRestaurantOrders", "Order", new { id = Model.Id })
