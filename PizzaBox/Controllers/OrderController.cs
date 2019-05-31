@@ -28,6 +28,7 @@ namespace PizzaBox.Controllers
 
         public IActionResult CreateOrder()
         {
+            if (LoginController.user == null) return RedirectToAction("Login", "Login");
             if (order == null) { order = new OrderModel(); }
             if (order.Restaurant.ID != null) ViewBag.Restaurant = ModelMapper.Map(RestaurantController.Repository.Read((int)order.Restaurant.ID));
 
@@ -35,12 +36,14 @@ namespace PizzaBox.Controllers
         }
         public IActionResult CreatePizza()
         {
+            if (order == null) return RedirectToAction("CreateOrder");
             ViewBag.Restaurant = ModelMapper.Map(RestaurantController.Repository.Read((int)order.Restaurant.ID));
             return View();
         }
 
         public IActionResult LinkRestaurant(RestaurantModel restaurant)
         {
+            if (order == null) return RedirectToAction("CreateOrder");
             try
             {
                 if (!ModelState.IsValid)
@@ -60,6 +63,7 @@ namespace PizzaBox.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreatePizza([Bind("SizeID,CrustID,PresetID,ToppingIDs,MaxToppings,Amount")] PizzaModel pizza)
         {
+            if (order == null) return RedirectToAction("CreateOrder");
             try
             {
                 if (!ModelState.IsValid)
@@ -81,12 +85,14 @@ namespace PizzaBox.Controllers
         }
         public IActionResult RemovePizza(int index)
         {
+            if (order == null) return RedirectToAction("CreateOrder");
             order.RemovePizza(index);
             return RedirectToAction("CreateOrder");
         }
 
         public IActionResult FinishOrder()
         {
+            if (order == null) return RedirectToAction("CreateOrder");
             order.User = (LoginController.user.ID, LoginController.user.Username);
             order.Date = DateTime.Now;
             string valid = Repository.Create(ModelMapper.Map(order), RestaurantController.Repository.Read((int)order.Restaurant.ID));
